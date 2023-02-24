@@ -2,29 +2,62 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter Quiz App by Oksana Nedilko',
-      home: MyHomePage(),
-      debugShowCheckedModeBanner: false,
-    );
+  State<StatefulWidget> createState() {
+    return MyAppState();
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class MyAppState extends State<MyApp> {
+  var questionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      questionIndex++;
+    });
+
+    print(questionIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    var questions = [
+      'What\'s your favorite color?',
+      'What\'s your favorite animal?',
+    ];
+
+    return MaterialApp(
+      title: 'Flutter Quiz App by Oksana Nedilko',
+      home: Scaffold(
         appBar: AppBar(
-      title: const Text(
-        'Quiz App by Oksana Nedilko',
+          title: const Text(
+            'Quiz App by Oksana Nedilko',
+          ),
+        ),
+        body: Column(
+          children: [
+            Text(
+              questions[questionIndex],
+            ),
+            ElevatedButton(
+              onPressed: () => answerQuestion(),
+              child: const Text('Answer 1'),
+            ),
+            ElevatedButton(
+              onPressed: () => answerQuestion(),
+              child: const Text('Answer 2'),
+            ),
+            ElevatedButton(
+              onPressed: () => answerQuestion(),
+              child: const Text('Answer 3'),
+            )
+          ],
+        ),
       ),
-    ));
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
