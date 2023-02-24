@@ -15,6 +15,36 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final questions = const [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': [
+        'Black',
+        'Red',
+        'Green',
+        'White',
+      ],
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': [
+        'Rabbit',
+        'Snake',
+        'Elephant',
+        'Lion',
+      ],
+    },
+    {
+      'questionText': 'What\'s your favorite browser?',
+      'answers': [
+        'Microsoft Edge',
+        'Google Chrome',
+        'Internet Explorer',
+        'Opera',
+      ]
+    }
+  ];
+
   var _questionIndex = 0;
 
   void _answerQuestion() {
@@ -23,40 +53,14 @@ class _MyAppState extends State<MyApp> {
     });
 
     print(_questionIndex);
+
+    if (_questionIndex < questions.length) {
+      print('We have more questions');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    const questions = [
-      {
-        'questionText': 'What\'s your favorite color?',
-        'answers': [
-          'Black',
-          'Red',
-          'Green',
-          'White',
-        ],
-      },
-      {
-        'questionText': 'What\'s your favorite animal?',
-        'answers': [
-          'Rabbit',
-          'Snake',
-          'Elephant',
-          'Lion',
-        ],
-      },
-      {
-        'questionText': 'What\'s your favorite browser?',
-        'answers': [
-          'Microsoft Edge',
-          'Google Chrome',
-          'Internet Explorer',
-          'Opera',
-        ]
-      }
-    ];
-
     return MaterialApp(
       title: 'Flutter Quiz App by Oksana Nedilko',
       home: Scaffold(
@@ -65,16 +69,20 @@ class _MyAppState extends State<MyApp> {
             'Quiz App by Oksana Nedilko',
           ),
         ),
-        body: Column(
-          children: [
-            Question(
-              questions[_questionIndex]['questionText'] as String,
-            ),
-            ...(questions[_questionIndex]['answers'] as List<String>)
-                .map((answer) => Answer(_answerQuestion, answer))
-                .toList()
-          ],
-        ),
+        body: _questionIndex < questions.length
+            ? Column(
+                children: [
+                  Question(
+                    questions[_questionIndex]['questionText'] as String,
+                  ),
+                  ...(questions[_questionIndex]['answers'] as List<String>)
+                      .map((answer) => Answer(_answerQuestion, answer))
+                      .toList()
+                ],
+              )
+            : const Center(
+                child: Text('You did it'),
+              ),
       ),
       debugShowCheckedModeBanner: false,
     );
