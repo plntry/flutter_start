@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './question.dart';
+import './answer.dart';
 
 void main() => runApp(const MyApp());
 
@@ -16,7 +17,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
       _questionIndex++;
     });
@@ -26,9 +27,34 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      'What\'s your favorite color?',
-      'What\'s your favorite animal?',
+    const questions = [
+      {
+        'questionText': 'What\'s your favorite color?',
+        'answers': [
+          'Black',
+          'Red',
+          'Green',
+          'White',
+        ],
+      },
+      {
+        'questionText': 'What\'s your favorite animal?',
+        'answers': [
+          'Rabbit',
+          'Snake',
+          'Elephant',
+          'Lion',
+        ],
+      },
+      {
+        'questionText': 'What\'s your favorite browser?',
+        'answers': [
+          'Microsoft Edge',
+          'Google Chrome',
+          'Internet Explorer',
+          'Opera',
+        ]
+      }
     ];
 
     return MaterialApp(
@@ -42,20 +68,11 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             Question(
-              questions[_questionIndex],
+              questions[_questionIndex]['questionText'] as String,
             ),
-            ElevatedButton(
-              onPressed: () => answerQuestion(),
-              child: const Text('Answer 1'),
-            ),
-            ElevatedButton(
-              onPressed: () => answerQuestion(),
-              child: const Text('Answer 2'),
-            ),
-            ElevatedButton(
-              onPressed: () => answerQuestion(),
-              child: const Text('Answer 3'),
-            )
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) => Answer(_answerQuestion, answer))
+                .toList()
           ],
         ),
       ),
