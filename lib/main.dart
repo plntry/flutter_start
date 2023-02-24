@@ -12,14 +12,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var questionIndex = 0;
+  var _questionIndex = 0;
 
   void answerQuestion() {
     setState(() {
-      questionIndex++;
+      _questionIndex++;
     });
 
-    print(questionIndex);
+    print(_questionIndex);
   }
 
   @override
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             Text(
-              questions[questionIndex],
+              questions[_questionIndex],
             ),
             ElevatedButton(
               onPressed: () => answerQuestion(),
