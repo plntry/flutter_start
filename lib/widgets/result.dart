@@ -26,16 +26,32 @@ class Result extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
+      margin: const EdgeInsets.all(20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            resultPhrase,
-            style: const TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            elevation: 8,
+            shadowColor: Colors.grey,
+            color: Colors.teal[800],
+            child: SizedBox(
+              height: 150,
+              child: Center(
+                child: Text(
+                  resultPhrase,
+                  style: const TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
           ),
-          Text(resultScore.toString()),
           TextButton(
             onPressed: () => resetQuiz(),
             child: const Text(

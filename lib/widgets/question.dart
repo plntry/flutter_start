@@ -7,14 +7,29 @@ class Question extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      elevation: 8,
+      shadowColor: Colors.grey,
+      color: Colors.teal[800],
       child: SizedBox(
-        width: double.infinity,
-        child: Text(
-          questionText,
-          style: const TextStyle(fontSize: 28),
-          textAlign: TextAlign.center,
+        height: 150,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              questionText,
+              style: const TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
         ),
       ),
     );
